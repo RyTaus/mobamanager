@@ -1,33 +1,33 @@
 import React from "react";
 import { StyleSheet, Text, View, Image } from "react-native";
 
-export default function PlayerCard() {
+export default function PlayerCard(props) {
   return (
     <View style={styles.playerCard}>
       <View style={styles.header}>
         <Image
           style={styles.playerImage}
-          source={{ uri: "https://lmuhacks.github.io/images/maddie.png" }}
+          source={{ uri: props.playerImgSrc }}
         ></Image>
         <View style={styles.names}>
-          <Text style={styles.fullName}>Maddie Louis</Text>
-          <Text style={styles.gamerTag}>"maddiemaddiemaddie"</Text>
+          <Text style={styles.fullName}>{props.name}</Text>
+          <Text style={styles.gamerTag}>"{props.gamerTag}"</Text>
         </View>
       </View>
       <View style={styles.statsOverview}>
         <Stat
           name="mental"
-          data={80}
+          data={props.mentalScore}
           imgSrc="https://lmuhacks.github.io/images/maddie.png"
         />
         <Stat
           name="micro"
-          data={90}
+          data={props.microScore}
           imgSrc="https://lmuhacks.github.io/images/maddie.png"
         />
         <Stat
           name="macro"
-          data={100}
+          data={props.macroScore}
           imgSrc="https://lmuhacks.github.io/images/maddie.png"
         />
       </View>
