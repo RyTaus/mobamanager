@@ -1,0 +1,85 @@
+syntax = "proto3";
+
+package proto;
+
+enum Role {
+  UNKNWON = 0;
+  TOP = 1;
+  JUNGLE = 2;
+  MID = 3;
+  BOT = 4;
+  SUPPORT = 5;
+}
+
+enum TopOrders {
+  TOP_NONE = 0;
+  TOP_PUSH = 1;
+  TOP_SCALE = 2;
+  TOP_ROAM = 3;
+}
+
+enum JungleOrders {
+  JUNGLE_NONE = 0;
+  JUNGLE_COUNTER_JUNGLE = 1;
+  JUNGLE_GANK = 2;
+  JUNGLE_OBJECTIVES = 3;
+  JUNGLE_FARM = 4;
+}
+
+enum MidOrders {
+  MID_NONE = 0;
+  MID_INVADE = 1;
+  MID_ROAM = 2;
+  MID_PUSH = 3;
+}
+
+enum BotOrders {
+  BOT_NONE = 0;
+  BOT_TOWER_DAMAGE = 1;
+  BOT_FARM = 2;
+}
+
+enum SupportOrders {
+  SUPPORT_NONE = 0;
+  SUPPORT_PUSH = 1;
+  SUPPORT_GANK = 2;
+  SUPPORT_VISION = 3;
+  SUPPORT_OBJECTIVES = 4;
+}
+
+message Stats {
+  float mental = 9;
+  float form = 10;
+  float leadership = 11;
+  float aggressiveness = 12;
+
+  float farming = 1;
+  float vision = 2;
+  float mechanics = 3;
+  float champion_pool = 4;
+  float macro = 5;
+  float roaming = 6;
+  float teamfight = 7;
+  float positioning = 8;
+}
+
+message Player {
+  string name = 1;
+  string gamer_tag = 2;
+
+  float age = 3;
+
+  Stats stats = 4;
+}
+
+message PlayerOrder {
+  Player player = 1;
+  Role role = 2;
+  oneof role_order {
+    TopOrders top_order = 3;
+    JungleOrders jungle_order = 4;
+    MidOrders mid_order = 5;
+    BotOrders bot_order = 6;
+    SupportOrders support_order = 7;
+  }
+}
