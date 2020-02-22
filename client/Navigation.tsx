@@ -40,11 +40,11 @@ const TabNavigator = () => (
 
 const App = () => (
   <NavigationContainer>
-    <Stack.Navigator initialRouteName="Loading" headerMode="none">
+    <Stack.Navigator initialRouteName="Loading">
       <Stack.Screen
         name="Loading"
         component={LoadingScreen}
-        options={{ headerTitle: "testing" }}
+        options={{ headerShown: false }}
       />
       <Stack.Screen name="Main" component={TabNavigator} />
     </Stack.Navigator>

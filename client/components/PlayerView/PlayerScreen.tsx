@@ -16,5 +16,3 @@ export default function PlayerScreen() {
     </SafeAreaView>
   );
 }
-
-PlayerScreen.navigationOptions = { title: "Players", headerShown: true };
