@@ -177,25 +177,6 @@ CREATE TABLE `profile` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `stat_block`
---
-
-DROP TABLE IF EXISTS `stat_block`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `stat_block` (
-  `stat_block_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `status` enum('active','deleted') COLLATE utf8_unicode_ci NOT NULL DEFAULT 'active',
-  `mental` int(11) NOT NULL,
-  `micro` int(11) NOT NULL,
-  `macro` int(11) NOT NULL,
-  PRIMARY KEY (`stat_block_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
 -- Table structure for table `team`
 --
 
@@ -254,4 +235,4 @@ SET @@SESSION.SQL_LOG_BIN = @MYSQLDUMP_TEMP_LOG_BIN;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-02-23  1:47:43
+-- Dump completed on 2020-02-23  2:00:38

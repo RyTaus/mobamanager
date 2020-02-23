@@ -94,16 +94,6 @@ INSERT INTO `profile` VALUES (0,'2020-02-23 02:47:58','2020-02-23 02:49:38','act
 UNLOCK TABLES;
 
 --
--- Dumping data for table `stat_block`
---
-
-LOCK TABLES `stat_block` WRITE;
-/*!40000 ALTER TABLE `stat_block` DISABLE KEYS */;
-INSERT INTO `stat_block` VALUES (0,'2020-02-23 02:47:58','2020-02-23 02:49:38','active',0,0,0),(2,'2020-02-23 02:51:10','2020-02-23 03:42:17','active',0,0,0);
-/*!40000 ALTER TABLE `stat_block` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Dumping data for table `team`
 --
 
@@ -133,4 +123,4 @@ SET @@SESSION.SQL_LOG_BIN = @MYSQLDUMP_TEMP_LOG_BIN;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-02-23  1:47:48
+-- Dump completed on 2020-02-23  2:00:40
