@@ -13,6 +13,9 @@ const Stack = createStackNavigator();
 const TabNavigator = () => (
   <Tab.Navigator
     screenOptions={({ route }) => ({
+      tabStyle: { flex: 1 },
+      style: { flex: 1, drawUnderTabBar: false, drawUnderNavBar: false },
+      safeAreaInset: true,
       tabBarIcon: ({ focused, color, size }) => {
         let iconName: string;
 
