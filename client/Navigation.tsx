@@ -1,3 +1,4 @@
+import DetailedPlayerScreen from "./components/DetailedPlayerView/DetailedPlayerScreen";
 import { Ionicons } from "@expo/vector-icons";
 import LoadingScreen from "./components/LoadingView/LoadingScreen";
 import { NavigationContainer } from "@react-navigation/native";
@@ -19,6 +20,7 @@ const settingsStack = () => (
 const playersStack = () => (
   <Stack.Navigator>
     <Stack.Screen name="Players" component={PlayerScreen} />
+    <Stack.Screen name="PlayerView" component={DetailedPlayerScreen} />
   </Stack.Navigator>
 );
 
