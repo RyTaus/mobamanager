@@ -6,6 +6,10 @@ HOST=127.0.0.1
 PORT=33066
 DBNAME=moba_ryan
 
-OUTFILE=mysql_schema.sql
+OPTIONS="-u$USER -p$PASS -h $HOST -P $PORT --column-statistics=0"
 
-mysqldump -u$USER -p$PASS -h $HOST -P $PORT --no-data $DBNAME > $OUTFILE
+OUTFILE=mysql_schema.sql
+OUTDATA=mysql_data.sql
+
+mysqldump $OPTIONS --no-data $DBNAME > $OUTFILE
+mysqldump $OPTIONS --no-create-info $DBNAME > $OUTDATA
