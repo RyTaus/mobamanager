@@ -10,11 +10,23 @@ import { createStackNavigator } from "@react-navigation/stack";
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
 
+const settingsStack = () => (
+  <Stack.Navigator>
+    <Stack.Screen name="Settings" component={SettingsScreen} />
+  </Stack.Navigator>
+);
+
+const playersStack = () => (
+  <Stack.Navigator>
+    <Stack.Screen name="Players" component={PlayerScreen} />
+  </Stack.Navigator>
+);
+
 const TabNavigator = () => (
   <Tab.Navigator
     screenOptions={({ route }) => ({
       tabStyle: { flex: 1 },
-      style: { flex: 1, drawUnderTabBar: false, drawUnderNavBar: false },
+      style: { flex: 1 },
       safeAreaInset: true,
       tabBarIcon: ({ focused, color, size }) => {
         let iconName: string;
@@ -36,8 +48,8 @@ const TabNavigator = () => (
       inactiveTintColor: "gray"
     }}
   >
-    <Tab.Screen name="Players" component={PlayerScreen} />
-    <Tab.Screen name="Settings" component={SettingsScreen} />
+    <Tab.Screen name="Players" component={playersStack} />
+    <Tab.Screen name="Settings" component={settingsStack} />
   </Tab.Navigator>
 );
 
@@ -49,7 +61,11 @@ const App = () => (
         component={LoadingScreen}
         options={{ headerShown: false }}
       />
-      <Stack.Screen name="Main" component={TabNavigator} />
+      <Stack.Screen
+        name="Main"
+        component={TabNavigator}
+        options={{ headerShown: false }}
+      />
     </Stack.Navigator>
   </NavigationContainer>
 );

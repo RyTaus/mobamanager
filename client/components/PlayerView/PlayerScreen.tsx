@@ -23,24 +23,24 @@ const DATA = [
     mentalScore: 50
   },
   {
-    fullName: "Ian Lizarda",
-    gamerTag: "ianianian",
+    fullName: "Ryan Taus",
+    gamerTag: "ryanryanryan",
     playerImgSrc: "https://lmuhacks.github.io/images/ian.jpeg",
     microScore: 10,
     macroScore: 25,
     mentalScore: 50
   },
   {
-    fullName: "Ian Lizarda",
-    gamerTag: "ianianian",
+    fullName: "Kevin Metelus",
+    gamerTag: "kevinkevinkevin",
     playerImgSrc: "https://lmuhacks.github.io/images/ian.jpeg",
     microScore: 10,
     macroScore: 25,
     mentalScore: 50
   },
   {
-    fullName: "Ian Lizarda",
-    gamerTag: "ianianian",
+    fullName: "Masao Kitamura",
+    gamerTag: "masaomasaomasao",
     playerImgSrc: "https://lmuhacks.github.io/images/ian.jpeg",
     microScore: 10,
     macroScore: 25,
@@ -61,7 +61,6 @@ export default function PlayerScreen() {
       <View style={styles.playerList}>
         <FlatList
           data={DATA}
-          // style={{ height: "85%" }}
           ItemSeparatorComponent={FlatListItemSeparator}
           renderItem={({ item }) => (
             <PlayerCard
