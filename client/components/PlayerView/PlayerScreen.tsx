@@ -61,7 +61,14 @@ export default function PlayerScreen() {
       <View style={styles.playerList}>
         <FlatList
           data={DATA}
-          ItemSeparatorComponent={FlatListItemSeparator}
+          ItemSeparatorComponent={() => (
+            <View
+              style={{
+                height: 10,
+                width: "100%"
+              }}
+            />
+          )}
           renderItem={({ item }) => (
             <PlayerCard
               fullName={item.fullName}
@@ -75,16 +82,5 @@ export default function PlayerScreen() {
         />
       </View>
     </SafeAreaView>
-  );
-}
-
-function FlatListItemSeparator() {
-  return (
-    <View
-      style={{
-        height: 10,
-        width: "100%"
-      }}
-    />
   );
 }
