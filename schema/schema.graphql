@@ -1,0 +1,91 @@
+// Team object
+team {
+  id: ID!
+  owner: String!
+  name: String!
+  players: [Player!]!
+  userID: Int!
+  overallScore: Int
+  coachID: Int
+  money: Int
+  fans: Int
+}
+
+query getTeam($playerID: Int!) {
+    team(id: $playerID) {
+      id: ID!
+      owner: String!
+      name: String!
+      players: [Player!]!
+      userID: Int!
+      overallScore: Int
+      coachID: Int
+      money: Int
+      sponsorID
+    }
+}
+
+// Player object
+type PersonData {
+  id: ID!
+  first: String
+  last: String
+  gamerTag: String
+  birthday: Int
+}
+
+type StatBlock {
+  id: ID!
+  mental: Int
+}
+
+type Player {
+  id: ID!
+  data: PersonData!
+  stats: StatBlock!
+}
+
+query getPlayer($playerID: Int!) {
+    player(id: $playerID) {
+        id
+        data
+        stats
+    }
+}
+
+
+// User object
+type user {
+   id: ID!
+   username: String
+   password: String
+   teamID: Int!
+}
+
+query getUser($userID: Int!) {
+    user(id: $userID) {
+        id
+        username
+        password
+        inGameName
+        money
+    }
+}
+
+// League
+
+type league {
+  id: ID!
+  timeStarted: String
+  usersInLeague: [id!]!
+  leagueRank: String
+}
+
+query getLeague($leagueID: Int!) {
+    league(id: $leagueID) {
+        id
+    }
+}
+// Coach Instructions
+
+// Match
