@@ -13,3 +13,7 @@ type Player {
     data: PersonData
     stats: StatBlock
 }
+
+type Query {
+    me: [PersonData!]!
+}
