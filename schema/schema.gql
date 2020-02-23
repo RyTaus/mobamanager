@@ -1,8 +1,8 @@
 // Team object
-team {
-  id: ID!
+type team {
+  id: Int!
   owner: String!
-  name: String!
+  teamName: String!
   players: [Player!]!
   userID: Int!
   overallScore: Int
@@ -13,7 +13,7 @@ team {
 
 query getTeam($playerID: Int!) {
     team(id: $playerID) {
-      id: ID!
+      id: Int!
       owner: String!
       name: String!
       players: [Player!]!
@@ -21,13 +21,12 @@ query getTeam($playerID: Int!) {
       overallScore: Int
       coachID: Int
       money: Int
-      sponsorID
     }
 }
 
 // Player object
 type PersonData {
-  id: ID!
+  id: Int!
   first: String
   last: String
   gamerTag: String
@@ -35,14 +34,17 @@ type PersonData {
 }
 
 type StatBlock {
-  id: ID!
+  id: Int!
   mental: Int
+  micro: Int
+  macro: Int
 }
 
 type Player {
-  id: ID!
+  id: Int!
   data: PersonData!
   stats: StatBlock!
+  coachInstruction: Int!
 }
 
 query getPlayer($playerID: Int!) {
@@ -53,39 +55,30 @@ query getPlayer($playerID: Int!) {
     }
 }
 
-
-// User object
-type user {
-   id: ID!
-   username: String
-   password: String
-   teamID: Int!
-}
-
-query getUser($userID: Int!) {
-    user(id: $userID) {
-        id
-        username
-        password
-        inGameName
-        money
-    }
-}
-
 // League
 
 type league {
-  id: ID!
-  timeStarted: String
-  usersInLeague: [id!]!
-  leagueRank: String
+  id: Int!
+  timeStarted: Date!
+  teamsInLeague: [Int!]!
+  leagueRank: String!
 }
 
-query getLeague($leagueID: Int!) {
-    league(id: $leagueID) {
-        id
-    }
+
+
+// Coach Instructions (List of Instructions Coach can give maybe be something you can unlock)
+type coachInstruction {
+  id: Int!
+  instruction: String!
+  Description: String!
 }
-// Coach Instructions
+
 
 // Match
+type match {
+  id: Int!
+  players: [Int]
+  status: String!
+  overallRating: Int!
+  enemyOverallRating: Int!
+}
