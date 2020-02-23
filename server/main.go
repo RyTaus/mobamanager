@@ -16,6 +16,7 @@ type Summoner struct {
 	First       *string `json:"first"`
 	Last        *string `json:"last"`
 	GamerTag    *string `json:"gamerTag"`
+	Password    *string `json:"password"`
 	Birthday    *string `json:"birthday"`
 	Coachstat   *string `json:"coachstat"`
 	Managerstat *string `json:"managerstat"`
@@ -26,10 +27,23 @@ type Summoners struct {
 	Summoners []Summoner `json:"summoners`
 }
 
+var summoners Summoners
+
 func getUser(rw http.ResponseWriter, r *http.Request) {
 	rw.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(rw).Encode(nil)
+	json.NewEncoder(rw).Encode(summoners.Summoners)
 }
+
+func getUser(rw http.ResponseWriter, r *http.Request) {
+	rw.Header().Set("Content-Type", "application/json")
+	body, err : = r.GetBody()
+	if err != nil {
+		log.Fatal(err)
+	}
+	json.NewEncoder(rw).Encode(summoners.Summoners)
+}
+
+// THE MAIN METHOD
 
 func main() {
 	jsonFile, err := os.Open("mockdata.json")
@@ -44,7 +58,6 @@ func main() {
 
 	byteValue, err := ioutil.ReadAll(jsonFile)
 
-	var summoners Summoners
 	json.Unmarshal(byteValue, &summoners)
 
 	fmt.Println(summoners)
@@ -62,7 +75,10 @@ func main() {
 	}
 
 	router := mux.NewRouter()
-	router.HandleFunc("/api/user", getUser).Methods("GET")
+	router.HandleFunc("/user", getUser).Methods("GET")
+	router.HandleFunc("/user/{id}", getUserById).Methods("GET")
+	// router.HandleFunc("/user", createUser).Methods("POST")
+	// router.HandleFunc("/login", login).Methods("GET")
 
 	log.Fatal(http.ListenAndServe(":8000", router))
 

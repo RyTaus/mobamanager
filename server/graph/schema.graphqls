@@ -1,32 +1,46 @@
-# GraphQL schema example
-#
-# https://gqlgen.com/getting-started/
 
-type User {
-  id: ID!
+type team {
+  id: Int!
+  owner: String!
   name: String!
+  players: [Player!]!
+  userID: Int!
+  overallScore: Int
+  coachID: Int
+  money: Int
+  fans: Int
 }
 
-type PersonData {     
-  first: String     
-  last: String     
-  gamerTag: String     
-  birthday: Int 
+type PersonData {
+  id: Int!
+  first: String
+  last: String
+  gamerTag: String
+  birthday: Int
 }
 
-type StatBlock {     
-  mental: Int 
+type StatBlock {
+  id: Int!
+  mental: Int
 }
 
-type Player {     
-  data: PersonData     
-  stats: StatBlock 
+type Player {
+  id: Int!
+  data: PersonData!
+  stats: StatBlock!
 }
 
-type Query {
-    name: String
+
+type user {
+   id: Int!
+   username: String
+   password: String
+   teamID: Int!
 }
 
-schema {
-    query: Query
+type league {
+  id: Int!
+  timeStarted: String
+  usersInLeague: [Int!]!
+  leagueRank: String
 }

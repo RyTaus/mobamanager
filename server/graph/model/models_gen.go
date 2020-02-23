@@ -3,6 +3,7 @@
 package model
 
 type PersonData struct {
+	ID       int     `json:"id"`
 	First    *string `json:"first"`
 	Last     *string `json:"last"`
 	GamerTag *string `json:"gamerTag"`
@@ -10,15 +11,38 @@ type PersonData struct {
 }
 
 type Player struct {
+	ID    int         `json:"id"`
 	Data  *PersonData `json:"data"`
 	Stats *StatBlock  `json:"stats"`
 }
 
 type StatBlock struct {
+	ID     int  `json:"id"`
 	Mental *int `json:"mental"`
 }
 
+type League struct {
+	ID            int     `json:"id"`
+	TimeStarted   *string `json:"timeStarted"`
+	UsersInLeague []int   `json:"usersInLeague"`
+	LeagueRank    *string `json:"leagueRank"`
+}
+
+type Team struct {
+	ID           int       `json:"id"`
+	Owner        string    `json:"owner"`
+	Name         string    `json:"name"`
+	Players      []*Player `json:"players"`
+	UserID       int       `json:"userID"`
+	OverallScore *int      `json:"overallScore"`
+	CoachID      *int      `json:"coachID"`
+	Money        *int      `json:"money"`
+	Fans         *int      `json:"fans"`
+}
+
 type User struct {
-	ID   string `json:"id"`
-	Name string `json:"name"`
+	ID       int     `json:"id"`
+	Username *string `json:"username"`
+	Password *string `json:"password"`
+	TeamID   int     `json:"teamID"`
 }
