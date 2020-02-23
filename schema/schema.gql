@@ -3,7 +3,7 @@ type team {
   id: Int!
   owner: String!
   teamName: String!
-  players: [Player!]!
+  players: playerBy
   userID: Int!
   overallScore: Int
   coachID: Int
