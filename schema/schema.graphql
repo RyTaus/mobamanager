@@ -1,6 +1,5 @@
-// Team object
-team {
-  id: ID!
+type Team {
+  id: Int!
   owner: String!
   name: String!
   players: [Player!]!
@@ -11,23 +10,8 @@ team {
   fans: Int
 }
 
-query getTeam($playerID: Int!) {
-    team(id: $playerID) {
-      id: ID!
-      owner: String!
-      name: String!
-      players: [Player!]!
-      userID: Int!
-      overallScore: Int
-      coachID: Int
-      money: Int
-      sponsorID
-    }
-}
-
-// Player object
 type PersonData {
-  id: ID!
+  id: Int!
   first: String
   last: String
   gamerTag: String
@@ -35,57 +19,31 @@ type PersonData {
 }
 
 type StatBlock {
-  id: ID!
+  id: Int!
   mental: Int
 }
 
 type Player {
-  id: ID!
+  id: Int!
   data: PersonData!
   stats: StatBlock!
 }
 
-query getPlayer($playerID: Int!) {
-    player(id: $playerID) {
-        id
-        data
-        stats
-    }
-}
 
-
-// User object
-type user {
-   id: ID!
+type User {
+   id: Int!
    username: String
    password: String
    teamID: Int!
 }
 
-query getUser($userID: Int!) {
-    user(id: $userID) {
-        id
-        username
-        password
-        inGameName
-        money
-    }
-}
-
-// League
-
-type league {
-  id: ID!
+type League {
+  id: Int!
   timeStarted: String
-  usersInLeague: [id!]!
+  usersInLeague: [Int!]!
   leagueRank: String
 }
 
-query getLeague($leagueID: Int!) {
-    league(id: $leagueID) {
-        id
-    }
+type Query {
+    name: Team
 }
-// Coach Instructions
-
-// Match
