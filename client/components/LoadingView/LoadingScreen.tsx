@@ -5,6 +5,11 @@ import { LinearGradient } from "expo-linear-gradient";
 import styles from "./LoadingScreen.styles";
 import { useNavigation } from "@react-navigation/native";
 
+import {
+  LOADING_GRADIENT_BOTTOM,
+  LOADING_GRADIENT_TOP
+} from "../shared/Styles";
+
 export default function LoadingScreen() {
   const navigation = useNavigation();
   useEffect(() => {

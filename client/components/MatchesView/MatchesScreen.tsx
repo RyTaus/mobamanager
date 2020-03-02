@@ -1,4 +1,11 @@
-import { Image, Text, View, SafeAreaView, FlatList } from "react-native";
+import {
+  Image,
+  Text,
+  View,
+  TouchableOpacity,
+  SafeAreaView,
+  FlatList
+} from "react-native";
 import { styles } from "./MatchesScreen.styles";
 
 import React from "react";
@@ -38,7 +45,8 @@ const DATA = [
   }
 ];
 
-export default function MatchesScreen() {
+export default function MatchesScreen({ navigation }) {
+  console.log(navigation);
   return (
     <SafeAreaView>
       <View style={styles.matchesList}>
@@ -56,35 +64,44 @@ export default function MatchesScreen() {
             switch (item.matchType) {
               case "Current":
                 return (
-                  <View style={[styles.currentMatch, styles.matchCard]}>
+                  <TouchableOpacity
+                    style={[styles.currentMatch, styles.matchCard]}
+                    onPress={() => navigation.navigate("DetailedMatchView")}
+                  >
                     <CurrentMatch
                       opposingTeamName={item.opposingTeamName}
                       opposingTeamRating={item.opposingTeamRating}
                       date={item.date}
                       time={item.time}
                     />
-                  </View>
+                  </TouchableOpacity>
                 );
               case "Upcoming":
                 return (
-                  <View style={[styles.upcomingMatch, styles.matchCard]}>
+                  <TouchableOpacity
+                    style={[styles.upcomingMatch, styles.matchCard]}
+                    onPress={() => navigation.navigate("DetailedMatchView")}
+                  >
                     <UpcomingMatch
                       opposingTeamName={item.opposingTeamName}
                       opposingTeamRating={item.opposingTeamRating}
                       date={item.date}
                       time={item.time}
                     />
-                  </View>
+                  </TouchableOpacity>
                 );
               case "Past":
                 return (
-                  <View style={[styles.pastMatch, styles.matchCard]}>
+                  <TouchableOpacity
+                    style={[styles.pastMatch, styles.matchCard]}
+                    onPress={() => navigation.navigate("DetailedMatchView")}
+                  >
                     <PastMatch
                       opposingTeamName={item.opposingTeamName}
                       status={item.status}
                       date={item.date}
                     />
-                  </View>
+                  </TouchableOpacity>
                 );
             }
           }}
