@@ -1,12 +1,14 @@
 import DetailedPlayerScreen from "./components/DetailedPlayerView/DetailedPlayerScreen";
 import { Ionicons } from "@expo/vector-icons";
 import LoadingScreen from "./components/LoadingView/LoadingScreen";
+import LoginScreen from "./components/LoginView/LoginScreen";
 import MatchesScreen from "./components/MatchesView/MatchesScreen";
 import DetailedMatchView from "./components/MatchesView/DetailedMatchView";
 import { NavigationContainer } from "@react-navigation/native";
 import PlayerScreen from "./components/PlayerView/PlayerScreen";
 import React from "react";
 import SettingsScreen from "./components/SettingsView/SettingsScreen";
+import SignupScreen from "./components/SignupView/SignupScreen";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
 
@@ -14,6 +16,13 @@ import { LOADING_GRADIENT_TOP } from "./components/shared/Styles";
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
+
+const authenticationStack = () => (
+  <Stack.Navigator>
+    <Stack.Screen name="Login" component={LoginScreen} />
+    <Stack.Screen name="Sign Up" component={SignupScreen} />
+  </Stack.Navigator>
+);
 
 const settingsStack = () => (
   <Stack.Navigator>
@@ -75,6 +84,11 @@ const App = () => (
       <Stack.Screen
         name="Loading"
         component={LoadingScreen}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Authentication"
+        component={authenticationStack}
         options={{ headerShown: false }}
       />
       <Stack.Screen

@@ -13,7 +13,7 @@ import {
 export default function LoadingScreen() {
   const navigation = useNavigation();
   useEffect(() => {
-    setTimeout(() => navigation.navigate("Main"), 3000);
+    setTimeout(() => navigation.navigate("Authentication"), 3000);
   }, []);
   return (
     <LinearGradient
