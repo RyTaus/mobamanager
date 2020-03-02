@@ -1,9 +1,9 @@
 install_deps:
 	yarn add -D graphql @graphql-codegen/cli
 	yarn install
-	pushd server
-	go get github.com/99designs/gqlgen
-	popd
+	cd server
+	go get
+	cd ..
 
 gen_client:
 	yarn run gen_client
