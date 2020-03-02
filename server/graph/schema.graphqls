@@ -1,0 +1,46 @@
+
+type team {
+  id: Int!
+  owner: String!
+  name: String!
+  players: [Player!]!
+  userID: Int!
+  overallScore: Int
+  coachID: Int
+  money: Int
+  fans: Int
+}
+
+type PersonData {
+  id: Int!
+  first: String
+  last: String
+  gamerTag: String
+  birthday: Int
+}
+
+type StatBlock {
+  id: Int!
+  mental: Int
+}
+
+type Player {
+  id: Int!
+  data: PersonData!
+  stats: StatBlock!
+}
+
+
+type user {
+   id: Int!
+   username: String
+   password: String
+   teamID: Int!
+}
+
+type league {
+  id: Int!
+  timeStarted: String
+  usersInLeague: [Int!]!
+  leagueRank: String
+}
