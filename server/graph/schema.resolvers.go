@@ -4,6 +4,7 @@ package graph
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/rytaus/mobamanager/server/graph/generated"
 	"github.com/rytaus/mobamanager/server/graph/model"
@@ -15,6 +16,18 @@ func (r *queryResolver) User(ctx context.Context) (*model.User, error) {
 		Username: "ryan",
 		Password: "password"}
 	return user, nil
+}
+
+func (r *queryResolver) Login(ctx context.Context, username string, password string) (*model.User, error) {
+	panic(fmt.Errorf("not implemented"))
+}
+
+func (r *queryResolver) SignUp(ctx context.Context, username string, password string) (*model.User, error) {
+	panic(fmt.Errorf("not implemented"))
+}
+
+func (r *queryResolver) GetTeamByUserID(ctx context.Context, teamID int) ([]*model.Player, error) {
+	panic(fmt.Errorf("not implemented"))
 }
 
 func (r *Resolver) Query() generated.QueryResolver { return &queryResolver{r} }

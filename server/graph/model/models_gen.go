@@ -127,18 +127,20 @@ func (e InGameStrategy) MarshalGQL(w io.Writer) {
 type JungleInstruction string
 
 const (
-	JungleInstructionNone JungleInstruction = "NONE"
-	JungleInstructionPush JungleInstruction = "PUSH"
+	JungleInstructionNone   JungleInstruction = "NONE"
+	JungleInstructionPush   JungleInstruction = "PUSH"
+	JungleInstructionInvade JungleInstruction = "INVADE"
 )
 
 var AllJungleInstruction = []JungleInstruction{
 	JungleInstructionNone,
 	JungleInstructionPush,
+	JungleInstructionInvade,
 }
 
 func (e JungleInstruction) IsValid() bool {
 	switch e {
-	case JungleInstructionNone, JungleInstructionPush:
+	case JungleInstructionNone, JungleInstructionPush, JungleInstructionInvade:
 		return true
 	}
 	return false
