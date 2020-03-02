@@ -12,7 +12,9 @@ interface Props {
 export default function ProgressBar({ title, stat, color }: Props) {
   return (
     <View style={{ margin: 10 }}>
-      <Text>{title}</Text>
+      <Text>
+        {title} - {Math.round((stat * 100) / 18)}
+      </Text>
       <Progress.Bar
         animated
         color={color}
