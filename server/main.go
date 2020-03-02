@@ -1,85 +1,89 @@
 package main
 
 import (
+	"database/sql"
 	"encoding/json"
-	"fmt"
-	"io/ioutil"
 	"net/http"
-	"os"
 
+	_ "github.com/go-sql-driver/mysql"
 	"github.com/gorilla/mux"
+	"github.com/rytaus/mobamanager/server/graph/model"
 	log "github.com/sirupsen/logrus"
 )
 
-type Summoner struct {
-	ID          *string `json:"id"`
-	First       *string `json:"first"`
-	Last        *string `json:"last"`
-	GamerTag    *string `json:"gamerTag"`
-	Password    *string `json:"password"`
-	Birthday    *string `json:"birthday"`
-	Coachstat   *string `json:"coachstat"`
-	Managerstat *string `json:"managerstat"`
-	Playerstat  *string `json:"playerstat"`
-}
+// type Config struct {
+// 	HttpPort     string
+// 	DatabasePath string
+// }
 
-type Summoners struct {
-	Summoners []Summoner `json:"summoners`
-}
+// func NewConfig() *Config {
+// 	return &Config{
+// 		HttpPort:     ":8080",
+// 		DatabasePath: "moba:manager@tcp(keckmysql-rds.lmucs.com:3306)/moba_master",
+// 	}
+// }
 
-var summoners Summoners
+// func connectDatabase(config *Config) (*sql.DB, error) {
+// 	return sql.Open("mysql", config.DatabasePath)
+// }
 
-func getUser(rw http.ResponseWriter, r *http.Request) {
+func getUsers(rw http.ResponseWriter, r *http.Request) {
 	rw.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(rw).Encode(summoners.Summoners)
+	db, err := sql.Open("mysql", "moba:manager@tcp(keckmysql-rds.lmucs.com:3306)/moba_master")
+	defer db.Close()
+	results, err := db.Query("SELECT id, username, password FROM `user`")
+	var users []model.User
+	for results.Next() {
+		var user model.User
+		err = results.Scan(&user.ID, &user.Username, &user.Password)
+		if err != nil {
+			panic(err.Error())
+		}
+		users = append(users, user)
+	}
+
+	json.NewEncoder(rw).Encode(users)
+
 }
 
 func getUserById(rw http.ResponseWriter, r *http.Request) {
-	rw.Header().Set("Content-Type", "application/json")
-	_, err := r.GetBody()
+	rw.Header().Set("Content-Type", "application/json; charset=UTF-8")
+	rw.Header().Set("Access-Control-Allow-Origin", "*")
+	// rw.Header().Set("Content-Type", "application/json")
+	db, err := sql.Open("mysql", "moba:manager@tcp(keckmysql-rds.lmucs.com:3306)/moba_master")
+	defer db.Close()
+	var user model.User
+	result, err := db.Query("SELECT id, username, password FROM `user` WHERE id = " + r.Header.Get("id"))
+	err = result.Scan(&user.ID, &user.Username, &user.Password)
 	if err != nil {
-		log.Fatal(err)
+		panic(err.Error())
 	}
-	json.NewEncoder(rw).Encode(summoners.Summoners)
+	json.NewEncoder(rw).Encode(user)
 }
 
 // THE MAIN METHOD
+func GetDiscs(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	body, err := ioutil.ReadAll(io.LimitReader(r.Body, 1048576))
+	log.Error(string(body))
+}
 
 func main() {
-	jsonFile, err := os.Open("mockdata.json")
-
-	if err != nil {
-		fmt.Println(err)
-	}
-
-	fmt.Println("Successfully Opened mockdata.json")
-
-	defer jsonFile.Close()
-
-	byteValue, err := ioutil.ReadAll(jsonFile)
-
-	json.Unmarshal(byteValue, &summoners)
-
-	fmt.Println(summoners)
-	for i := 0; i < len(summoners.Summoners); i++ {
-		fmt.Println("{")
-		fmt.Println("  ID: " + *summoners.Summoners[i].ID)
-		fmt.Println("  Firstname: " + *summoners.Summoners[i].First)
-		fmt.Println("  Lastname: " + *summoners.Summoners[i].Last)
-		fmt.Println("  Gamertag: " + *summoners.Summoners[i].GamerTag)
-		fmt.Println("  Birthday: " + *summoners.Summoners[i].Birthday)
-		fmt.Println("  Coachstat : " + *summoners.Summoners[i].Coachstat)
-		fmt.Println("  Managerstat: " + *summoners.Summoners[i].Managerstat)
-		fmt.Println("  Playerstat: " + *summoners.Summoners[i].Playerstat)
-		fmt.Println("}")
-	}
-
 	router := mux.NewRouter()
-	router.HandleFunc("/user", getUser).Methods("GET")
-	router.HandleFunc("/user/{id}", getUserById).Methods("GET")
+	handler := http.HandlerFunc(mainHandler)
+	router.Methods("GET").Path("/").Handler(handler)
+
+	router.HandleFunc("/user", getUsers).Methods("GET")
+	allowedOrigins := handlers.AllowedOrigins([]string{"*"})
+	headersOk := handlers.AllowedHeaders([]string{"X-Requested-With", "Accept", "Content-Type", "Content-Length", "Accept-Encoding", "Accept-Language", "X-CSRF-Token", "Authorization"})
+	allowedMethods := handlers.AllowedMethods([]string{"GET", "POST", "HEAD", "OPTIONS"})
+
+	// router.HandleFunc("/user/{id}", getUserById).Methods("GET")
 	// router.HandleFunc("/user", createUser).Methods("POST")
 	// router.HandleFunc("/login", login).Methods("GET")
 
-	log.Fatal(http.ListenAndServe(":8000", router))
+	log.Fatal(http.ListenAndServe(":8080",
+		handlers.CORS(allowedOrigins, headersOk, allowedMethods)(router)))
 
 }
