@@ -1,4 +1,5 @@
-type Team {
+
+type team {
   id: Int!
   owner: String!
   name: String!
@@ -30,20 +31,16 @@ type Player {
 }
 
 
-type User {
+type user {
    id: Int!
    username: String
    password: String
    teamID: Int!
 }
 
-type League {
+type league {
   id: Int!
   timeStarted: String
   usersInLeague: [Int!]!
   leagueRank: String
-}
-
-type Query {
-    name: Team
 }
