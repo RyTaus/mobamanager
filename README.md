@@ -1,11 +1,10 @@
 # mobamanager
 Manage a team of esports athletes
 
+## Server Quickstart
 
-## Server
 ```
-make install_deps
-make gen_server
+make server
 ```
 
 ```
