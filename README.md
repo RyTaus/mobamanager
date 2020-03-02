@@ -3,8 +3,10 @@ Manage a team of esports athletes
 
 
 ## Server
+Steps to set up:
 ```
-make install_deps
+cd server
+go get github.com/99designs/gqlgen
 make gen_server
 ```
 
