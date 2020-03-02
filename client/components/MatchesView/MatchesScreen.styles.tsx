@@ -54,7 +54,7 @@ export const styles = StyleSheet.create({
     width: 350
   },
   upcomingMatch: {
-    borderColor: "#4ca2cd",
+    borderColor: UPCOMING_MATCH_BORDER,
     borderWidth: 3,
     height: 210
   },
@@ -64,7 +64,7 @@ export const styles = StyleSheet.create({
     height: 50
   },
   currentMatch: {
-    borderColor: "#67B26F",
+    borderColor: CURRENT_MATCH_BORDER,
     borderWidth: 3,
     height: 210
   },
