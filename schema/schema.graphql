@@ -130,3 +130,7 @@ type Instruction {
   pickBanStrategy: PickBanStrategy!
   inGameStrategy: InGameStrategy!
 }
+
+type Query {
+  user: User!
+}
