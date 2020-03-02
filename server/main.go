@@ -34,9 +34,9 @@ func getUser(rw http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(rw).Encode(summoners.Summoners)
 }
 
-func getUser(rw http.ResponseWriter, r *http.Request) {
+func getUserById(rw http.ResponseWriter, r *http.Request) {
 	rw.Header().Set("Content-Type", "application/json")
-	body, err : = r.GetBody()
+	_, err := r.GetBody()
 	if err != nil {
 		log.Fatal(err)
 	}

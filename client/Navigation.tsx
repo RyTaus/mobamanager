@@ -1,12 +1,15 @@
 import { Ionicons } from "@expo/vector-icons";
 import LoadingScreen from "./components/LoadingView/LoadingScreen";
 import MatchesScreen from "./components/MatchesView/MatchesScreen";
+import DetailedMatchView from "./components/MatchesView/DetailedMatchView";
 import { NavigationContainer } from "@react-navigation/native";
 import PlayerScreen from "./components/PlayerView/PlayerScreen";
 import React from "react";
 import SettingsScreen from "./components/SettingsView/SettingsScreen";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
+
+import { LOADING_GRADIENT_TOP } from "./components/shared/Styles";
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -54,7 +57,7 @@ const TabNavigator = () => (
       }
     })}
     tabBarOptions={{
-      activeTintColor: "#67B26F",
+      activeTintColor: LOADING_GRADIENT_TOP,
       inactiveTintColor: "gray"
     }}
   >
@@ -77,6 +80,7 @@ const App = () => (
         component={TabNavigator}
         options={{ headerShown: false }}
       />
+      <Stack.Screen name="DetailedMatchView" component={DetailedMatchView} />
     </Stack.Navigator>
   </NavigationContainer>
 );
