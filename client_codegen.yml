@@ -1,0 +1,13 @@
+overwrite: true
+schema: "schema/schema.graphql"
+documents: "schema/queries/query.graphql"
+generates:
+  client/generated/graphql.tsx:
+    plugins:
+      - "typescript"
+      - "typescript-operations"
+      - "typescript-resolvers"
+      - "typescript-react-apollo"
+  ./graphql.schema.json:
+    plugins:
+      - "introspection"
