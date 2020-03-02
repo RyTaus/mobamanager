@@ -5,11 +5,11 @@ import { styles } from "./DetailedMatchView.styles";
 import React from "react";
 
 export default function MatchesScreen({ date, editable }) {
-  if (editable) {
-    return <EditableView />;
-  } else {
-    return <NonEditableView />;
-  }
+  return (
+    <View style={styles.matchesScreen}>
+      {editable ? <EditableView /> : <NonEditableView />}
+    </View>
+  );
 }
 
 function EditableView() {
@@ -53,12 +53,14 @@ const PLAYER_TYPES = [
 
 function Players() {
   return (
-    <FlatList
-      data={PLAYER_TYPES}
-      renderItem={({ item }) => {
-        return Player(item);
-      }}
-    />
+    <View style={styles.players}>
+      <FlatList
+        data={PLAYER_TYPES}
+        renderItem={({ item }) => {
+          return Player(item);
+        }}
+      />
+    </View>
   );
 }
 
