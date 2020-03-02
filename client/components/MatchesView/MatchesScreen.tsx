@@ -66,7 +66,12 @@ export default function MatchesScreen({ navigation }) {
                 return (
                   <TouchableOpacity
                     style={[styles.currentMatch, styles.matchCard]}
-                    onPress={() => navigation.navigate("DetailedMatchView")}
+                    onPress={() =>
+                      navigation.navigate("DetailedMatchView", {
+                        date: item.date,
+                        editable: true
+                      })
+                    }
                   >
                     <CurrentMatch
                       opposingTeamName={item.opposingTeamName}
@@ -80,7 +85,12 @@ export default function MatchesScreen({ navigation }) {
                 return (
                   <TouchableOpacity
                     style={[styles.upcomingMatch, styles.matchCard]}
-                    onPress={() => navigation.navigate("DetailedMatchView")}
+                    onPress={() =>
+                      navigation.navigate("DetailedMatchView", {
+                        date: item.date,
+                        editable: true
+                      })
+                    }
                   >
                     <UpcomingMatch
                       opposingTeamName={item.opposingTeamName}
@@ -94,7 +104,12 @@ export default function MatchesScreen({ navigation }) {
                 return (
                   <TouchableOpacity
                     style={[styles.pastMatch, styles.matchCard]}
-                    onPress={() => navigation.navigate("DetailedMatchView")}
+                    onPress={() =>
+                      navigation.navigate("DetailedMatchView", {
+                        date: item.date,
+                        editable: false
+                      })
+                    }
                   >
                     <PastMatch
                       opposingTeamName={item.opposingTeamName}
