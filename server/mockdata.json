@@ -1,0 +1,82 @@
+{
+  "summoners": [
+    {
+      "id": "1",
+      "first": "kevin",
+      "last": "metelus",
+      "gamertag": "batkev",
+      "password": "poij2908",
+      "birthday": "1996-09-08",
+      "coachstat": "0",
+      "playerstat": "0",
+      "managerstat": "1"
+    },
+    {    
+      "id": "2",
+      "first": "ryan",
+      "last": "taus",
+      "gamertag": "ballers strife",
+      "password": "poij2908",
+      "birthday": "1996-09-23",
+      "coachstat": "0",
+      "playerstat": "1",
+      "managerstat": "0"
+    },
+    {    
+      "id": "3",
+      "first": "jay",
+      "last": "patel",
+      "gamertag": "evoburst",
+      "password": "poij2908",
+      "birthday": "1969-08-09",
+      "coachstat": "0",
+      "playerstat": "0",
+      "managerstat": "2"
+    },
+    {    
+      "id": "4",
+      "first": "ian",
+      "last": "lizarda",
+      "gamertag": "lizard",
+      "password": "poij2908",
+      "birthday": "2000-01-08",
+      "coachstat": "0",
+      "playerstat": "0",
+      "managerstat": "3"
+    },
+    {    
+      "id": "5",
+      "first": "masao",
+      "last": "kitamura",
+      "gamertag": "masaozao",
+      "password": "poij2908",
+      "birthday": "100-01-13",
+      "coachstat": "1",
+      "playerstat": "0",
+      "managerstat": "0"
+    }],
+  "coachstat" : [{
+    "id": "1",
+    "stat": "40"
+  },
+  {
+    "id": "2",
+    "stat": "20"
+  }],
+  "playerstat" : [{
+    "id": "1",
+    "stat": "48"
+  }],
+  "managerstat" : [{
+    "id": "1",
+    "stat": "67"
+  },
+  {
+    "id": "2",
+    "stat": "45"
+  },
+  {
+    "id": "3",
+    "stat": "78"
+  }]
+}
