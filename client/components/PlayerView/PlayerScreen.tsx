@@ -1,9 +1,14 @@
+import { FlatList, SafeAreaView, ScrollView, Text, View } from "react-native";
 import React, { useState } from "react";
-import { SafeAreaView, Text, View, FlatList, ScrollView } from "react-native";
+import {
+  TouchableHighlight,
+  TouchableOpacity
+} from "react-native-gesture-handler";
 
-import { styles } from "./PlayerScreen.styles";
-import { SearchBar } from "react-native-elements";
 import PlayerCard from "../shared/PlayerCard/PlayerCard";
+import { SearchBar } from "react-native-elements";
+import { styles } from "./PlayerScreen.styles";
+import { useNavigation } from "@react-navigation/native";
 
 const DATA = [
   {
@@ -49,6 +54,8 @@ const DATA = [
 ];
 
 export default function PlayerScreen() {
+  const navigation = useNavigation();
+
   const [input, setInput] = useState("");
   return (
     <SafeAreaView>
@@ -61,23 +68,23 @@ export default function PlayerScreen() {
       <View style={styles.playerList}>
         <FlatList
           data={DATA}
-          ItemSeparatorComponent={() => (
-            <View
-              style={{
-                height: 10,
-                width: "100%"
-              }}
-            />
-          )}
+          contentContainerStyle={{ margin: 0, padding: 0 }}
+          style={{ margin: 0, padding: 0 }}
+          keyExtractor={(item, index) => index.toString()}
           renderItem={({ item }) => (
-            <PlayerCard
-              fullName={item.fullName}
-              gamerTag={item.gamerTag}
-              playerImgSrc={item.playerImgSrc}
-              microScore={item.microScore}
-              macroScore={item.macroScore}
-              mentalScore={item.mentalScore}
-            />
+            <TouchableOpacity
+              style={{ marginHorizontal: 10, marginVertical: 5 }}
+              onPress={() => navigation.navigate("PlayerView")}
+            >
+              <PlayerCard
+                fullName={item.fullName}
+                gamerTag={item.gamerTag}
+                playerImgSrc={item.playerImgSrc}
+                microScore={item.microScore}
+                macroScore={item.macroScore}
+                mentalScore={item.mentalScore}
+              />
+            </TouchableOpacity>
           )}
         />
       </View>
