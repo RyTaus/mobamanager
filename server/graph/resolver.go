@@ -5,4 +5,4 @@ package graph
 
 //go:generate go run github.com/99designs/gqlgen
 
-type Resolver struct{}
+type Resolver struct{} // Put db in here? Where does it get initialized.
