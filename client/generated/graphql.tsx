@@ -1,11 +1,6 @@
 import { GraphQLResolveInfo } from 'graphql';
 import gql from 'graphql-tag';
-import * as React from 'react';
-import * as ApolloReactCommon from '@apollo/react-common';
-import * as ApolloReactComponents from '@apollo/react-components';
-import * as ApolloReactHoc from '@apollo/react-hoc';
 export type Maybe<T> = T | null;
-export type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string,
@@ -15,40 +10,137 @@ export type Scalars = {
   Float: number,
 };
 
-export type PersonData = {
-   __typename?: 'PersonData',
-  first?: Maybe<Scalars['String']>,
-  last?: Maybe<Scalars['String']>,
-  gamerTag?: Maybe<Scalars['String']>,
-  birthday?: Maybe<Scalars['Int']>,
+export type Coach = {
+   __typename?: 'Coach',
+  id: Scalars['Int'],
+  profile: Profile,
+  leadership: Scalars['Float'],
 };
+
+export enum InGameStrategy {
+  None = 'NONE'
+}
+
+export type Instruction = {
+   __typename?: 'Instruction',
+  id: Scalars['Int'],
+  /** 
+ * Players
+   * Instructions are actually enums.
+ */
+  topPlayer: Player,
+  topInstruction: TopInstruction,
+  junglePlayer: Player,
+  jungleInstruction: JungleInstruction,
+  midPlayer: Player,
+  midInstruction: MidInstruction,
+  marksmanPlayer: Player,
+  marksmanInstruction: MarksmanInstruction,
+  supportPlayer: Player,
+  supportInstruction: SupportInstruction,
+  /** Overall */
+  pickBanStrategy: PickBanStrategy,
+  inGameStrategy: InGameStrategy,
+};
+
+export enum JungleInstruction {
+  None = 'NONE',
+  Push = 'PUSH'
+}
+
+export type League = {
+   __typename?: 'League',
+  id: Scalars['Int'],
+  name: Scalars['String'],
+  division: Scalars['Int'],
+};
+
+export type Manager = {
+   __typename?: 'Manager',
+  id: Scalars['Int'],
+  profile?: Maybe<Profile>,
+};
+
+export enum MarksmanInstruction {
+  None = 'NONE',
+  Push = 'PUSH'
+}
+
+/** Matches */
+export type Match = {
+   __typename?: 'Match',
+  id: Scalars['Int'],
+  league?: Maybe<League>,
+  home: Team,
+  homeInstruction: Instruction,
+  away: Team,
+  awayInstruction: Instruction,
+};
+
+export enum MidInstruction {
+  None = 'NONE',
+  Push = 'PUSH'
+}
+
+export enum PickBanStrategy {
+  None = 'NONE'
+}
 
 export type Player = {
    __typename?: 'Player',
-  data?: Maybe<PersonData>,
-  stats?: Maybe<StatBlock>,
+  id: Scalars['Int'],
+  profile: Profile,
+  team: Team,
+  vision: Scalars['Float'],
+  championPool: Scalars['Float'],
+  lastHit: Scalars['Float'],
+  wage: Scalars['Int'],
+};
+
+/** Person */
+export type Profile = {
+   __typename?: 'Profile',
+  id: Scalars['Int'],
+  firstName: Scalars['String'],
+  lastName: Scalars['String'],
+  gamerTag: Scalars['String'],
+  birthday: Scalars['String'],
 };
 
 export type Query = {
    __typename?: 'Query',
-  me: Array<PersonData>,
+  user: User,
 };
 
-export type StatBlock = {
-   __typename?: 'StatBlock',
-  mental?: Maybe<Scalars['Int']>,
+export enum SupportInstruction {
+  None = 'NONE',
+  Push = 'PUSH'
+}
+
+export type Team = {
+   __typename?: 'Team',
+  id: Scalars['Int'],
+  user: User,
+  coach: Coach,
+  league: League,
+  manager: Manager,
+  name: Scalars['String'],
+  fans: Scalars['Int'],
+  money: Scalars['Int'],
 };
 
-export type GetMeQueryVariables = {};
+export enum TopInstruction {
+  None = 'NONE',
+  Push = 'PUSH'
+}
 
+export type User = {
+   __typename?: 'User',
+  id: Scalars['Int'],
+  username: Scalars['String'],
+  password: Scalars['String'],
+};
 
-export type GetMeQuery = (
-  { __typename?: 'Query' }
-  & { me: Array<(
-    { __typename?: 'PersonData' }
-    & Pick<PersonData, 'first'>
-  )> }
-);
 
 
 
@@ -124,53 +216,154 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = {
   Query: ResolverTypeWrapper<{}>,
-  PersonData: ResolverTypeWrapper<PersonData>,
-  String: ResolverTypeWrapper<Scalars['String']>,
+  User: ResolverTypeWrapper<User>,
   Int: ResolverTypeWrapper<Scalars['Int']>,
+  String: ResolverTypeWrapper<Scalars['String']>,
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>,
-  StatBlock: ResolverTypeWrapper<StatBlock>,
+  Team: ResolverTypeWrapper<Team>,
+  Coach: ResolverTypeWrapper<Coach>,
+  Profile: ResolverTypeWrapper<Profile>,
+  Float: ResolverTypeWrapper<Scalars['Float']>,
+  League: ResolverTypeWrapper<League>,
+  Manager: ResolverTypeWrapper<Manager>,
   Player: ResolverTypeWrapper<Player>,
+  Match: ResolverTypeWrapper<Match>,
+  Instruction: ResolverTypeWrapper<Instruction>,
+  TopInstruction: TopInstruction,
+  JungleInstruction: JungleInstruction,
+  MidInstruction: MidInstruction,
+  MarksmanInstruction: MarksmanInstruction,
+  SupportInstruction: SupportInstruction,
+  PickBanStrategy: PickBanStrategy,
+  InGameStrategy: InGameStrategy,
 };
 
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = {
   Query: {},
-  PersonData: PersonData,
-  String: Scalars['String'],
+  User: User,
   Int: Scalars['Int'],
+  String: Scalars['String'],
   Boolean: Scalars['Boolean'],
-  StatBlock: StatBlock,
+  Team: Team,
+  Coach: Coach,
+  Profile: Profile,
+  Float: Scalars['Float'],
+  League: League,
+  Manager: Manager,
   Player: Player,
+  Match: Match,
+  Instruction: Instruction,
+  TopInstruction: TopInstruction,
+  JungleInstruction: JungleInstruction,
+  MidInstruction: MidInstruction,
+  MarksmanInstruction: MarksmanInstruction,
+  SupportInstruction: SupportInstruction,
+  PickBanStrategy: PickBanStrategy,
+  InGameStrategy: InGameStrategy,
 };
 
-export type PersonDataResolvers<ContextType = any, ParentType extends ResolversParentTypes['PersonData'] = ResolversParentTypes['PersonData']> = {
-  first?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>,
-  last?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>,
-  gamerTag?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>,
-  birthday?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>,
+export type CoachResolvers<ContextType = any, ParentType extends ResolversParentTypes['Coach'] = ResolversParentTypes['Coach']> = {
+  id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>,
+  profile?: Resolver<ResolversTypes['Profile'], ParentType, ContextType>,
+  leadership?: Resolver<ResolversTypes['Float'], ParentType, ContextType>,
+  __isTypeOf?: isTypeOfResolverFn<ParentType>,
+};
+
+export type InstructionResolvers<ContextType = any, ParentType extends ResolversParentTypes['Instruction'] = ResolversParentTypes['Instruction']> = {
+  id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>,
+  topPlayer?: Resolver<ResolversTypes['Player'], ParentType, ContextType>,
+  topInstruction?: Resolver<ResolversTypes['TopInstruction'], ParentType, ContextType>,
+  junglePlayer?: Resolver<ResolversTypes['Player'], ParentType, ContextType>,
+  jungleInstruction?: Resolver<ResolversTypes['JungleInstruction'], ParentType, ContextType>,
+  midPlayer?: Resolver<ResolversTypes['Player'], ParentType, ContextType>,
+  midInstruction?: Resolver<ResolversTypes['MidInstruction'], ParentType, ContextType>,
+  marksmanPlayer?: Resolver<ResolversTypes['Player'], ParentType, ContextType>,
+  marksmanInstruction?: Resolver<ResolversTypes['MarksmanInstruction'], ParentType, ContextType>,
+  supportPlayer?: Resolver<ResolversTypes['Player'], ParentType, ContextType>,
+  supportInstruction?: Resolver<ResolversTypes['SupportInstruction'], ParentType, ContextType>,
+  pickBanStrategy?: Resolver<ResolversTypes['PickBanStrategy'], ParentType, ContextType>,
+  inGameStrategy?: Resolver<ResolversTypes['InGameStrategy'], ParentType, ContextType>,
+  __isTypeOf?: isTypeOfResolverFn<ParentType>,
+};
+
+export type LeagueResolvers<ContextType = any, ParentType extends ResolversParentTypes['League'] = ResolversParentTypes['League']> = {
+  id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>,
+  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>,
+  division?: Resolver<ResolversTypes['Int'], ParentType, ContextType>,
+  __isTypeOf?: isTypeOfResolverFn<ParentType>,
+};
+
+export type ManagerResolvers<ContextType = any, ParentType extends ResolversParentTypes['Manager'] = ResolversParentTypes['Manager']> = {
+  id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>,
+  profile?: Resolver<Maybe<ResolversTypes['Profile']>, ParentType, ContextType>,
+  __isTypeOf?: isTypeOfResolverFn<ParentType>,
+};
+
+export type MatchResolvers<ContextType = any, ParentType extends ResolversParentTypes['Match'] = ResolversParentTypes['Match']> = {
+  id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>,
+  league?: Resolver<Maybe<ResolversTypes['League']>, ParentType, ContextType>,
+  home?: Resolver<ResolversTypes['Team'], ParentType, ContextType>,
+  homeInstruction?: Resolver<ResolversTypes['Instruction'], ParentType, ContextType>,
+  away?: Resolver<ResolversTypes['Team'], ParentType, ContextType>,
+  awayInstruction?: Resolver<ResolversTypes['Instruction'], ParentType, ContextType>,
   __isTypeOf?: isTypeOfResolverFn<ParentType>,
 };
 
 export type PlayerResolvers<ContextType = any, ParentType extends ResolversParentTypes['Player'] = ResolversParentTypes['Player']> = {
-  data?: Resolver<Maybe<ResolversTypes['PersonData']>, ParentType, ContextType>,
-  stats?: Resolver<Maybe<ResolversTypes['StatBlock']>, ParentType, ContextType>,
+  id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>,
+  profile?: Resolver<ResolversTypes['Profile'], ParentType, ContextType>,
+  team?: Resolver<ResolversTypes['Team'], ParentType, ContextType>,
+  vision?: Resolver<ResolversTypes['Float'], ParentType, ContextType>,
+  championPool?: Resolver<ResolversTypes['Float'], ParentType, ContextType>,
+  lastHit?: Resolver<ResolversTypes['Float'], ParentType, ContextType>,
+  wage?: Resolver<ResolversTypes['Int'], ParentType, ContextType>,
+  __isTypeOf?: isTypeOfResolverFn<ParentType>,
+};
+
+export type ProfileResolvers<ContextType = any, ParentType extends ResolversParentTypes['Profile'] = ResolversParentTypes['Profile']> = {
+  id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>,
+  firstName?: Resolver<ResolversTypes['String'], ParentType, ContextType>,
+  lastName?: Resolver<ResolversTypes['String'], ParentType, ContextType>,
+  gamerTag?: Resolver<ResolversTypes['String'], ParentType, ContextType>,
+  birthday?: Resolver<ResolversTypes['String'], ParentType, ContextType>,
   __isTypeOf?: isTypeOfResolverFn<ParentType>,
 };
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
-  me?: Resolver<Array<ResolversTypes['PersonData']>, ParentType, ContextType>,
+  user?: Resolver<ResolversTypes['User'], ParentType, ContextType>,
 };
 
-export type StatBlockResolvers<ContextType = any, ParentType extends ResolversParentTypes['StatBlock'] = ResolversParentTypes['StatBlock']> = {
-  mental?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>,
+export type TeamResolvers<ContextType = any, ParentType extends ResolversParentTypes['Team'] = ResolversParentTypes['Team']> = {
+  id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>,
+  user?: Resolver<ResolversTypes['User'], ParentType, ContextType>,
+  coach?: Resolver<ResolversTypes['Coach'], ParentType, ContextType>,
+  league?: Resolver<ResolversTypes['League'], ParentType, ContextType>,
+  manager?: Resolver<ResolversTypes['Manager'], ParentType, ContextType>,
+  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>,
+  fans?: Resolver<ResolversTypes['Int'], ParentType, ContextType>,
+  money?: Resolver<ResolversTypes['Int'], ParentType, ContextType>,
+  __isTypeOf?: isTypeOfResolverFn<ParentType>,
+};
+
+export type UserResolvers<ContextType = any, ParentType extends ResolversParentTypes['User'] = ResolversParentTypes['User']> = {
+  id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>,
+  username?: Resolver<ResolversTypes['String'], ParentType, ContextType>,
+  password?: Resolver<ResolversTypes['String'], ParentType, ContextType>,
   __isTypeOf?: isTypeOfResolverFn<ParentType>,
 };
 
 export type Resolvers<ContextType = any> = {
-  PersonData?: PersonDataResolvers<ContextType>,
+  Coach?: CoachResolvers<ContextType>,
+  Instruction?: InstructionResolvers<ContextType>,
+  League?: LeagueResolvers<ContextType>,
+  Manager?: ManagerResolvers<ContextType>,
+  Match?: MatchResolvers<ContextType>,
   Player?: PlayerResolvers<ContextType>,
+  Profile?: ProfileResolvers<ContextType>,
   Query?: QueryResolvers<ContextType>,
-  StatBlock?: StatBlockResolvers<ContextType>,
+  Team?: TeamResolvers<ContextType>,
+  User?: UserResolvers<ContextType>,
 };
 
 
@@ -180,29 +373,3 @@ export type Resolvers<ContextType = any> = {
 */
 export type IResolvers<ContextType = any> = Resolvers<ContextType>;
 
-
-export const GetMeDocument = gql`
-    query GetMe {
-  me {
-    first
-  }
-}
-    `;
-export type GetMeComponentProps = Omit<ApolloReactComponents.QueryComponentOptions<GetMeQuery, GetMeQueryVariables>, 'query'>;
-
-    export const GetMeComponent = (props: GetMeComponentProps) => (
-      <ApolloReactComponents.Query<GetMeQuery, GetMeQueryVariables> query={GetMeDocument} {...props} />
-    );
-    
-export type GetMeProps<TChildProps = {}> = ApolloReactHoc.DataProps<GetMeQuery, GetMeQueryVariables> & TChildProps;
-export function withGetMe<TProps, TChildProps = {}>(operationOptions?: ApolloReactHoc.OperationOption<
-  TProps,
-  GetMeQuery,
-  GetMeQueryVariables,
-  GetMeProps<TChildProps>>) {
-    return ApolloReactHoc.withQuery<TProps, GetMeQuery, GetMeQueryVariables, GetMeProps<TChildProps>>(GetMeDocument, {
-      alias: 'getMe',
-      ...operationOptions
-    });
-};
-export type GetMeQueryResult = ApolloReactCommon.QueryResult<GetMeQuery, GetMeQueryVariables>;

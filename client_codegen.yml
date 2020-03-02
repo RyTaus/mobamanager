@@ -1,6 +1,6 @@
 overwrite: true
 schema: "schema/schema.graphql"
-documents: "schema/queries/query.graphql"
+# documents: "schema/queries/query.graphql"
 generates:
   client/generated/graphql.tsx:
     plugins:
