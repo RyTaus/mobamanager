@@ -1,7 +1,8 @@
 import * as Progress from "react-native-progress";
 
-import React, { useEffect, useState } from "react";
 import { Text, View } from "react-native";
+
+import React from "react";
 
 interface Props {
   title: string;
