@@ -46,12 +46,28 @@ func getUsers(rw http.ResponseWriter, r *http.Request) {
 
 }
 
+func getUserByID(rw http.ResponseWriter, r *http.Request) {
+	rw.Header().Set("Content-Type", "application/json")
+	db, err := sql.Open("mysql", "moba:manager@tcp(keckmysql-rds.lmucs.com:3306)/moba_master")
+	defer db.Close()
+	params := mux.Vars(r)
+	var user model.User
+	result, err := db.Query("SELECT id, username, password FROM `user` WHERE id = " + params["id"])
+	for result.Next() {
+		err = result.Scan(&user.ID, &user.Username, &user.Password)
+		if err != nil {
+			panic(err.Error())
+		}
+	}
+	json.NewEncoder(rw).Encode(user)
+}
+
 // THE MAIN METHOD
 
 func main() {
 	router := mux.NewRouter()
 	router.HandleFunc("/user", getUsers).Methods("GET")
-	// router.HandleFunc("/user/{id}", getUserById).Methods("GET")
+	router.HandleFunc("/user/{id}", getUserByID).Methods("GET")
 	// router.HandleFunc("/user", createUser).Methods("POST")
 	// router.HandleFunc("/login", login).Methods("GET")
 
