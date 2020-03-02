@@ -1,19 +1,49 @@
+type Team {
+  id: Int!
+  owner: String!
+  name: String!
+  players: [Player!]!
+  userID: Int!
+  overallScore: Int
+  coachID: Int
+  money: Int
+  fans: Int
+}
+
 type PersonData {
-    first: String
-    last: String
-    gamerTag: String
-    birthday: Int
+  id: Int!
+  first: String
+  last: String
+  gamerTag: String
+  birthday: Int
 }
 
 type StatBlock {
-    mental: Int
+  id: Int!
+  mental: Int
 }
 
 type Player {
-    data: PersonData
-    stats: StatBlock
+  id: Int!
+  data: PersonData!
+  stats: StatBlock!
+}
+
+
+type User {
+   id: Int!
+   username: String
+   password: String
+   teamID: Int!
+}
+
+type League {
+  id: Int!
+  timeStarted: String
+  usersInLeague: [Int!]!
+  leagueRank: String
 }
 
 type Query {
-    me: [PersonData!]!
+    name: Team
 }
