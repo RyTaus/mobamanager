@@ -5,6 +5,3 @@ cd server/
 go generate ./...
 cd ..
 rm -r server/schema
-cd server
-go get github.com/99designs/gqlgen
-cd ..
