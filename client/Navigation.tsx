@@ -66,7 +66,7 @@ const App = () => (
       <Stack.Screen
         name="Main"
         component={TabNavigator}
-        options={{ headerShown: false }}
+        options={{ headerShown: false, gestureEnabled: false }}
       />
     </Stack.Navigator>
   </NavigationContainer>

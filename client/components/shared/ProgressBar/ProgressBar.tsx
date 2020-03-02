@@ -6,17 +6,20 @@ import { Text, View } from "react-native";
 interface Props {
   title: string;
   stat: number;
+  color?: string;
 }
 
-export default function ProgressBar({ title, stat }: Props) {
+export default function ProgressBar({ title, stat, color }: Props) {
   return (
     <View style={{ margin: 10 }}>
       <Text>{title}</Text>
       <Progress.Bar
         animated
+        color={color}
         progress={stat}
         width={300}
-        height={20}
+        height={15}
+        borderRadius={5}
         useNativeDriver
       />
     </View>

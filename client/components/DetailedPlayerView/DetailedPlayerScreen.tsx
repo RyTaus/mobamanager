@@ -7,9 +7,9 @@ import ProgressBar from "../shared/ProgressBar/ProgressBar";
 import { styles } from "./DetailedPlayerScreen.styles";
 
 export default function DetailedPlayerScreen() {
-  const [leadership, setLeadership] = useState(0);
+  const [value, setValue] = useState(0);
   useEffect(() => {
-    setTimeout(() => setLeadership(0.3), 500);
+    setTimeout(() => setValue(0.3), 500);
   }, []);
   return (
     <View style={styles.container}>
@@ -25,12 +25,12 @@ export default function DetailedPlayerScreen() {
         <Text>xpooks@gmail.com</Text>
       </View>
       <View style={{ flex: 10 }}>
-        <ProgressBar title="Leadership" stat={leadership} />
-        <ProgressBar title="Mentality" stat={leadership} />
-        <ProgressBar title="Aggressivness" stat={leadership} />
-        <ProgressBar title="Leadership" stat={leadership} />
-        <ProgressBar title="Leadership" stat={leadership} />
-        <ProgressBar title="Leadership" stat={leadership} />
+        <ProgressBar title="Leadership" stat={value} />
+        <ProgressBar title="Leadership" stat={value} color="#F25A5F" />
+        <ProgressBar title="Mentality" stat={value} color="#A800FF" />
+        <ProgressBar title="Leadership" stat={value} color="#FD63B0" />
+        <ProgressBar title="Aggressivness" stat={value} color="#58E55C" />
+        <ProgressBar title="Leadership" stat={value} color="#FFAA00" />
       </View>
     </View>
   );

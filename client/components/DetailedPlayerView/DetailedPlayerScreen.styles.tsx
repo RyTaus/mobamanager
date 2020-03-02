@@ -18,8 +18,6 @@ export const styles = StyleSheet.create({
     width: 128,
     height: 128,
     borderRadius: 128 / 2,
-    borderColor: "#33C3F7",
-    borderWidth: 2,
     resizeMode: "contain",
     justifyContent: "center",
     alignContent: "center",
