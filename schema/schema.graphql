@@ -1,0 +1,132 @@
+type User {
+  id: Int!
+
+  username: String!
+  password: String!
+}
+
+type Team {
+  id: Int!
+
+  user: User!
+  coach: Coach!
+  league: League!
+  manager: Manager!
+
+  name: String!
+  fans: Int!
+  money: Int!
+}
+
+type League {
+  id: Int!
+
+  name: String!
+  division: Int!
+}
+
+# Person
+type Profile {
+  id: Int!
+
+  firstName: String!
+  lastName: String!
+  gamerTag: String!
+  birthday: String!
+}
+
+type Coach {
+  id: Int!
+
+  profile: Profile!
+
+  leadership: Float!
+}
+
+type Player {
+  id: Int!
+
+  profile: Profile!
+  team: Team!
+
+  vision: Float!
+  championPool: Float!
+  lastHit: Float!
+  wage: Int!
+}
+
+type Manager {
+  id: Int!
+
+  profile: Profile
+}
+
+
+# Matches
+type Match {
+  id: Int!
+
+  league: League
+  home: Team!
+  homeInstruction: Instruction!
+  away: Team!
+  awayInstruction: Instruction!
+}
+
+enum TopInstruction {
+  NONE
+  PUSH
+}
+
+enum JungleInstruction {
+  NONE
+  PUSH
+}
+
+enum MidInstruction {
+  NONE
+  PUSH
+}
+
+enum MarksmanInstruction {
+  NONE
+  PUSH
+}
+
+enum SupportInstruction {
+  NONE
+  PUSH
+}
+
+enum PickBanStrategy {
+  NONE
+}
+
+enum InGameStrategy {
+  NONE
+}
+
+type Instruction {
+  id: Int!
+
+  # Players
+  # Instructions are actually enums.
+  topPlayer: Player!
+  topInstruction: TopInstruction!
+
+  junglePlayer: Player!
+  jungleInstruction: JungleInstruction!
+
+  midPlayer: Player!
+  midInstruction: MidInstruction!
+
+  marksmanPlayer: Player!
+  marksmanInstruction: MarksmanInstruction!
+
+  supportPlayer: Player!
+  supportInstruction: SupportInstruction!
+
+  # Overall
+  pickBanStrategy: PickBanStrategy!
+  inGameStrategy: InGameStrategy!
+}
