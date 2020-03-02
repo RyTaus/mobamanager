@@ -1,3 +1,4 @@
+import DetailedPlayerScreen from "./components/DetailedPlayerView/DetailedPlayerScreen";
 import { Ionicons } from "@expo/vector-icons";
 import LoadingScreen from "./components/LoadingView/LoadingScreen";
 import MatchesScreen from "./components/MatchesView/MatchesScreen";
@@ -23,6 +24,7 @@ const settingsStack = () => (
 const playersStack = () => (
   <Stack.Navigator>
     <Stack.Screen name="Players" component={PlayerScreen} />
+    <Stack.Screen name="PlayerView" component={DetailedPlayerScreen} />
   </Stack.Navigator>
 );
 
@@ -78,7 +80,7 @@ const App = () => (
       <Stack.Screen
         name="Main"
         component={TabNavigator}
-        options={{ headerShown: false }}
+        options={{ headerShown: false, gestureEnabled: false }}
       />
       <Stack.Screen name="DetailedMatchView" component={DetailedMatchView} />
     </Stack.Navigator>

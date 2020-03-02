@@ -2,11 +2,14 @@ import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
   playerCard: {
-    borderRadius: 4,
-    borderWidth: 0.5,
-    borderColor: "black",
-    height: 150,
-    width: 350
+    borderRadius: 5,
+    padding: 15,
+    backgroundColor: "white",
+    shadowColor: "#000",
+    shadowOffset: { width: 2, height: 1 },
+    shadowOpacity: 0.3,
+    shadowRadius: 3,
+    elevation: 5
   },
   header: {
     flexDirection: "row"
@@ -17,11 +20,11 @@ export const styles = StyleSheet.create({
     width: 70
   },
   names: {
-    left: 10,
-    top: 10
+    left: 10
   },
   fullName: {
-    fontSize: 20
+    fontSize: 30,
+    fontWeight: "600"
   },
   gamerTag: {
     fontSize: 16
