@@ -13,12 +13,12 @@ export default function ProgressBar({ title, stat, color }: Props) {
   return (
     <View style={{ margin: 10 }}>
       <Text>
-        {title} - {Math.round(stat * 18)}
+        {title} - {stat}
       </Text>
       <Progress.Bar
         animated
         color={color}
-        progress={stat}
+        progress={stat / 18}
         width={300}
         height={15}
         borderRadius={5}

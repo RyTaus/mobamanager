@@ -9,7 +9,7 @@ import { styles } from "./DetailedPlayerScreen.styles";
 export default function DetailedPlayerScreen() {
   const [value, setValue] = useState(0);
   useEffect(() => {
-    setTimeout(() => setValue(0.3), 500);
+    setTimeout(() => setValue(14), 500);
   }, []);
   return (
     <View style={styles.container}>
