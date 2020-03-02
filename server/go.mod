@@ -1,4 +1,4 @@
-module github.com/mobamanager/server
+module github.com/rytaus/mobamanager/server
 
 go 1.13
 

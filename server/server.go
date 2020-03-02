@@ -7,13 +7,13 @@ import (
 
 	"github.com/99designs/gqlgen/graphql/handler"
 	"github.com/99designs/gqlgen/graphql/playground"
-	"github.com/mobamanager/server/graph"
-	"github.com/mobamanager/server/graph/generated"
+	"github.com/rytaus/mobamanager/server/graph"
+	"github.com/rytaus/mobamanager/server/graph/generated"
 )
 
 const defaultPort = "8080"
 
-func main() {
+func main2() {
 	port := os.Getenv("PORT")
 	if port == "" {
 		port = defaultPort
