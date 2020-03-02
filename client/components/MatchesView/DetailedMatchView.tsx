@@ -1,6 +1,7 @@
-import { View, FlatList, Text } from "react-native";
-
+import { View, FlatList, Text, Picker } from "react-native";
 import { styles } from "./DetailedMatchView.styles";
+
+import { Dropdown } from "react-native-material-dropdown";
 
 import React from "react";
 
@@ -14,7 +15,7 @@ export default function MatchesScreen({ date, editable }) {
 
 function EditableView() {
   return (
-    <View style={styles.EditableView}>
+    <View style={styles.editableView}>
       <Players />
     </View>
   );
@@ -22,7 +23,7 @@ function EditableView() {
 
 function NonEditableView() {
   return (
-    <View style={styles.NonEditableView}>
+    <View style={styles.nonEditableView}>
       <Players />
     </View>
   );
@@ -65,9 +66,18 @@ function Players() {
 }
 
 function Player({ position, playOptions }) {
+  const dropdownOptions = playOptions.map(option => {
+    return { value: option };
+  });
   return (
-    <View style={styles.Player}>
-      <Text>{position}</Text>
+    <View style={styles.player}>
+      <Text style={styles.position}>{position}</Text>
+      <Dropdown
+        containerStyle={styles.dropdownContainer}
+        pickerStyle={styles.dropdownPicker}
+        label="Play Options"
+        data={dropdownOptions}
+      />
     </View>
   );
 }

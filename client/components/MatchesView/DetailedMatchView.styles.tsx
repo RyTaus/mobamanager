@@ -6,12 +6,23 @@ export const styles = StyleSheet.create({
     paddingLeft: 10,
     paddingTop: 10
   },
-  EditableView: {},
-  NonEditableView: {},
-  Players: {
+  editableView: {},
+  nonEditableView: {},
+  players: {
+    justifyContent: "center"
+  },
+  player: {
+    height: 110,
+    flexDirection: "row",
     justifyContent: "space-evenly"
   },
-  Player: {
-    height: 110
+  position: {
+    fontSize: 20
+  },
+  dropdownContainer: {
+    width: 200
+  },
+  dropdownPicker: {
+    width: 200
   }
 });
