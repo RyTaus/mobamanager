@@ -6,6 +6,8 @@ import (
 	"log"
 	"os"
 
+	models "github.com/rytaus/mobamanager/server/graph/model"
+
 	_ "github.com/go-sql-driver/mysql"
 )
 
@@ -48,7 +50,7 @@ func main() {
 	}
 
 	for results.Next() {
-		var user User
+		var user models.User
 		// for each row, scan the result into our user composite object
 		err = results.Scan(&user.ID, &user.Name)
 		if err != nil {
