@@ -4,17 +4,14 @@ package graph
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/rytaus/mobamanager/server/graph/generated"
 	"github.com/rytaus/mobamanager/server/graph/model"
 )
 
 func (r *queryResolver) User(ctx context.Context) (*model.User, error) {
-	user := &model.User{
-		ID:       0,
-		Username: "ryan",
-		Password: "password"}
-	return user, nil
+	panic(fmt.Errorf("not implemented"))
 }
 
 func (r *Resolver) Query() generated.QueryResolver { return &queryResolver{r} }

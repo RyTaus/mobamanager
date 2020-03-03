@@ -610,7 +610,7 @@ type Player {
 type Manager {
   id: Int!
 
-  profile: Profile!
+  profile: Profile
 }
 
 
@@ -1447,14 +1447,11 @@ func (ec *executionContext) _Manager_profile(ctx context.Context, field graphql.
 		return graphql.Null
 	}
 	if resTmp == nil {
-		if !graphql.HasFieldError(ctx, fc) {
-			ec.Errorf(ctx, "must not be null")
-		}
 		return graphql.Null
 	}
 	res := resTmp.(*model.Profile)
 	fc.Result = res
-	return ec.marshalNProfile2ᚖgithubᚗcomᚋrytausᚋmobamanagerᚋserverᚋgraphᚋmodelᚐProfile(ctx, field.Selections, res)
+	return ec.marshalOProfile2ᚖgithubᚗcomᚋrytausᚋmobamanagerᚋserverᚋgraphᚋmodelᚐProfile(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) _Match_id(ctx context.Context, field graphql.CollectedField, obj *model.Match) (ret graphql.Marshaler) {
@@ -3785,9 +3782,6 @@ func (ec *executionContext) _Manager(ctx context.Context, sel ast.SelectionSet, 
 			}
 		case "profile":
 			out.Values[i] = ec._Manager_profile(ctx, field, obj)
-			if out.Values[i] == graphql.Null {
-				invalids++
-			}
 		default:
 			panic("unknown field " + strconv.Quote(field.Name))
 		}
@@ -4829,6 +4823,17 @@ func (ec *executionContext) marshalOLeague2ᚖgithubᚗcomᚋrytausᚋmobamanage
 		return graphql.Null
 	}
 	return ec._League(ctx, sel, v)
+}
+
+func (ec *executionContext) marshalOProfile2githubᚗcomᚋrytausᚋmobamanagerᚋserverᚋgraphᚋmodelᚐProfile(ctx context.Context, sel ast.SelectionSet, v model.Profile) graphql.Marshaler {
+	return ec._Profile(ctx, sel, &v)
+}
+
+func (ec *executionContext) marshalOProfile2ᚖgithubᚗcomᚋrytausᚋmobamanagerᚋserverᚋgraphᚋmodelᚐProfile(ctx context.Context, sel ast.SelectionSet, v *model.Profile) graphql.Marshaler {
+	if v == nil {
+		return graphql.Null
+	}
+	return ec._Profile(ctx, sel, v)
 }
 
 func (ec *executionContext) unmarshalOString2string(ctx context.Context, v interface{}) (string, error) {
