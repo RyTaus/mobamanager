@@ -1,8 +1,14 @@
 // This file will not be regenerated automatically.
 //
 // It serves as dependency injection for your app, add any dependencies you require here.
-package graph
 
 //go:generate go run github.com/99designs/gqlgen
+package graph
 
-type Resolver struct{} // Put db in here? Where does it get initialized.
+import (
+	"database/sql"
+)
+
+type Resolver struct {
+	DB *sql.DB
+}
