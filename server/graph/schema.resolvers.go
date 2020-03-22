@@ -4,14 +4,19 @@ package graph
 
 import (
 	"context"
-	"fmt"
+	// "fmt"
+	"log"
 
+	"github.com/rytaus/mobamanager/server/auth"
 	"github.com/rytaus/mobamanager/server/graph/generated"
 	"github.com/rytaus/mobamanager/server/graph/model"
 )
 
 func (r *queryResolver) User(ctx context.Context) (*model.User, error) {
-	panic(fmt.Errorf("not implemented"))
+	user := auth.GetUserFromContext(ctx)
+	log.Printf(string(user.ID))
+	// panic(fmt.Errorf("not implemented"))
+	return user, nil
 }
 
 func (r *Resolver) Query() generated.QueryResolver { return &queryResolver{r} }

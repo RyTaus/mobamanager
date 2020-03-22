@@ -1,0 +1,1 @@
+This package handles realtime events.
