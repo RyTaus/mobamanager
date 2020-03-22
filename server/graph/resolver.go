@@ -4,10 +4,6 @@
 
 //go:generate go run github.com/99designs/gqlgen
 package graph
-<<<<<<< HEAD
-
-type Resolver struct{}
-=======
 
 import (
 	"database/sql"
@@ -16,4 +12,3 @@ import (
 type Resolver struct {
 	DB *sql.DB
 }
->>>>>>> f9c1f2b5970c334a511666bcd0d4e1a7ab234bb8
