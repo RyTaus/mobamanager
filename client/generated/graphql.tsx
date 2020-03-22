@@ -1,6 +1,7 @@
 import { GraphQLResolveInfo } from 'graphql';
 import gql from 'graphql-tag';
 export type Maybe<T> = T | null;
+export type RequireFields<T, K extends keyof T> = { [X in Exclude<keyof T, K>]?: T[X] } & { [P in K]-?: NonNullable<T[P]> };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string,
@@ -110,6 +111,20 @@ export type Profile = {
 export type Query = {
    __typename?: 'Query',
   user: User,
+  signUp: User,
+  logIn: Scalars['String'],
+};
+
+
+export type QuerySignUpArgs = {
+  username: Scalars['String'],
+  password: Scalars['String']
+};
+
+
+export type QueryLogInArgs = {
+  username: Scalars['String'],
+  password: Scalars['String']
 };
 
 export enum SupportInstruction {
@@ -332,6 +347,8 @@ export type ProfileResolvers<ContextType = any, ParentType extends ResolversPare
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
   user?: Resolver<ResolversTypes['User'], ParentType, ContextType>,
+  signUp?: Resolver<ResolversTypes['User'], ParentType, ContextType, RequireFields<QuerySignUpArgs, 'username' | 'password'>>,
+  logIn?: Resolver<ResolversTypes['String'], ParentType, ContextType, RequireFields<QueryLogInArgs, 'username' | 'password'>>,
 };
 
 export type TeamResolvers<ContextType = any, ParentType extends ResolversParentTypes['Team'] = ResolversParentTypes['Team']> = {
