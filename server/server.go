@@ -8,10 +8,11 @@ import (
 
 	"github.com/99designs/gqlgen/graphql/handler"
 	"github.com/99designs/gqlgen/graphql/playground"
-	"github.com/rytaus/mobamanager/server/graph"
-	"github.com/rytaus/mobamanager/server/auth"
-	"github.com/rytaus/mobamanager/server/graph/generated"
 	"github.com/go-chi/chi"
+	_ "github.com/go-sql-driver/mysql"
+	"github.com/rytaus/mobamanager/server/auth"
+	"github.com/rytaus/mobamanager/server/graph"
+	"github.com/rytaus/mobamanager/server/graph/generated"
 )
 
 const defaultPort = "8080"

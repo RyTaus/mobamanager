@@ -44,6 +44,7 @@ github.com/rytaus/mobamanager v0.0.0-20200302031936-25bf91a13e52 h1:Ok47U484Hy3R
 github.com/rytaus/mobamanager v0.0.0-20200302042125-a6c2794c981e h1:s5goSspK0fd1pxFkwCp2SIYbdn2wJJgfsfodFXYfB34=
 github.com/rytaus/mobamanager v0.0.0-20200302045259-836586d7bfb3 h1:eFhZDlN6PwScNOdiy5FQIZiopHXkEWNtolrY4DUJJ1Y=
 github.com/rytaus/mobamanager v0.0.0-20200302074003-7609c4fdc9f2 h1:+hcjbLWsRb3s7t3fpHwsHgtotFp01VMEh+6mYmtoTXk=
+github.com/rytaus/mobamanager v0.0.0-20200305060122-f9c1f2b5970c h1:H0SudJBB8dUhFeDu+ZQ5mqdkvWdLdnX980lu2djKCTo=
 github.com/sergi/go-diff v1.1.0/go.mod h1:STckp+ISIX8hZLjrqAeVduY0gWCT9IjLuqbuNXdaHfM=
 github.com/shurcooL/httpfs v0.0.0-20171119174359-809beceb2371/go.mod h1:ZY1cvUeJuFPAdZ/B6v7RHavJWZn2YPVFQ1OSXhCGOkg=
 github.com/shurcooL/vfsgen v0.0.0-20180121065927-ffb13db8def0/go.mod h1:TrYk7fJVaAttu97ZZKrO9UbRa8izdowaMIZcxYMbVaw=
