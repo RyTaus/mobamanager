@@ -27,7 +27,6 @@ func NewUser(db *sql.DB, username string, password string) *model.User {
 	if err != nil {
 		fmt.Println(err)
 	}
-	fmt.Println(result)
 
 	id, err := result.LastInsertId()
 	fmt.Printf(string(id))
