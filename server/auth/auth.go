@@ -3,7 +3,9 @@ package auth
 import (
 	"context"
 	"database/sql"
+	"log"
 	"net/http"
+	"net/http/httputil"
 
 	"github.com/rytaus/mobamanager/server/graph/model"
 )
@@ -21,6 +23,10 @@ type contextKey struct {
 func Middleware(db *sql.DB) func(http.Handler) http.Handler {
 	return func(next http.Handler) http.Handler {
 		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+			log.Printf("ZUGZUG 1")
+			bytes, err := httputil.DumpRequest(r, true)
+			log.Printf(string(bytes))
+			// panic(formatRequest(r))
 			// get the token from the request.
 			token, err := getTokenFromRequest(r)
 			if err != nil {
@@ -28,6 +34,7 @@ func Middleware(db *sql.DB) func(http.Handler) http.Handler {
 				next.ServeHTTP(w, r)
 				return
 			}
+			log.Printf("ZUGZUG 2")
 
 			user, err := getUserFromToken(db, token)
 			if err != nil {
@@ -37,6 +44,7 @@ func Middleware(db *sql.DB) func(http.Handler) http.Handler {
 			}
 			// could grab the user so add it to the context for whatever function was called.
 			ctx := context.WithValue(r.Context(), userCtxKey, user)
+			log.Printf("ZUGZUG 3")
 
 			// call the function this wraps.
 			r = r.WithContext(ctx)

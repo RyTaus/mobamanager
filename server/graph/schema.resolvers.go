@@ -20,6 +20,8 @@ func (r *queryResolver) User(ctx context.Context) (*model.User, error) {
 }
 
 func (r *queryResolver) SignUp(ctx context.Context, username string, password string) (*model.User, error) {
+	log.Printf("ZUGZUG signup")
+
 	user := crud.NewUser(r.DB, username, password)
 	return user, nil
 }
