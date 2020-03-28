@@ -1,13 +1,14 @@
 package crud
 
 import (
+	"database/sql"
+	"fmt"
 	"math/rand"
 
-	"github.com/rytaus/mobamanager/server/graph"
 	"github.com/rytaus/mobamanager/server/graph/model"
 )
 
-func calculateWage(plater *model.Player) int {
+func calculateWage(player *model.Player) int {
 	// some fuzzy math here with their stats and age?
 	return 20
 }
@@ -24,14 +25,27 @@ func setStartingStats(player *model.Player) {
 
 }
 
-func GenerateStartingPlayer(r graph.Resolver, team *model.Team) *model.Player {
+func GenerateStartingPlayer(db *sql.DB, team *model.Team) *model.Player {
 	player := &model.Player{}
 
-	player.Profile = GenerateProfile()
+	player.Profile = GenerateProfile(db)
 	setStartingStats(player)
 	player.Wage = calculateWage(player)
 	player.Team = team
 
-	return player
+	return CreatePlayer(db, player)
+}
 
+func CreatePlayer(db *sql.DB, player *model.Player) *model.Player {
+	result, err := db.Exec(`INSERT INTO 
+			player(profile_id, team_id, vision, champion_pool, last_hit)
+			VALUES(?, ?, ?, ?, ?)`,
+		player.Profile.ID, player.Team.ID, player.Vision, player.ChampionPool, player.LastHit)
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	id, err := result.LastInsertId()
+	player.ID = int(id)
+	return player
 }

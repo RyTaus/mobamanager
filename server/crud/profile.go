@@ -1,6 +1,9 @@
 package crud
 
 import (
+	"database/sql"
+	"fmt"
+
 	"math/rand"
 
 	"github.com/rytaus/mobamanager/server/graph/model"
@@ -20,11 +23,26 @@ func lastName() string {
 	return lastNames[rand.Intn(len(lastNames))]
 }
 
-func GenerateProfile() *model.Profile {
-	return &model.Profile{
+func GenerateProfile(db *sql.DB) *model.Profile {
+	profile := &model.Profile{
 		FirstName: firstName(),
 		LastName:  lastName(),
 		GamerTag:  "gamer_tag",
 		Birthday:  "2002-06-12",
 	}
+
+	return CreateProfile(db, profile)
+}
+
+func CreateProfile(db *sql.DB, profile *model.Profile) *model.Profile {
+	result, err := db.Exec(`INSERT INTO
+			profile(first_name, last_name, gamertag)
+			VALUES(?, ?, ?)`, profile.FirstName, profile.LastName, profile.GamerTag)
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	id, err := result.LastInsertId()
+	profile.ID = int(id)
+	return profile
 }

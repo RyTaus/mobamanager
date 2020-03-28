@@ -3,7 +3,6 @@ package crud
 import (
 	"database/sql"
 	"fmt"
-	"math/rand"
 
 	"github.com/rytaus/mobamanager/server/graph/model"
 )
